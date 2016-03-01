@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {HeroDetailComponent} from './hero-detail.component';
 import {HeroService} from './hero.service';
+import {OnInit} from 'angular2/core';
 
 
 interface Hero {
@@ -22,8 +23,6 @@ interface Hero {
   </ul>
    <my-hero-detail [hero]="selectedHero"></my-hero-detail>
     `,
-  directives: [HeroDetailComponent],
-  providers: [HeroService],
   styles: [`
   .selected {
     background-color: #CFD8DC !important;
@@ -71,14 +70,25 @@ interface Hero {
     margin-right: .8em;
     border-radius: 4px 0px 0px 4px;
   }
-`]
+`],
+  directives: [HeroDetailComponent],
+  providers: [HeroService]
 })
 
 export class AppComponent {
-  constructor(private _heroService: HeroService) { }
   title = 'Tour of heroes';
   heroes: Hero[];
   selectedHero: Hero;
+
+  constructor(private _heroService: HeroService) { }
+
+  getHeroes() {
+    this._heroService.getHeroes().then(heroes => this.heroes = heroes);
+  }
+  ngOnInit() {
+    this.getHeroes();
+  }
+
 
   onSelect(hero: Hero) { this.selectedHero = hero; }
 }
