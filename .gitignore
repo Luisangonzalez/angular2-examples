@@ -31,3 +31,25 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# Only TypeScript on app
+**/app/*.js
+*.js.map
+
+# Or type definitions we mirror from github
+# (NB: these lines are removed in publish-build-artifacts.sh)
+**/typings/**/*.d.ts
+**/typings/tsd.cached.json
+
+# Include when developing application packages.
+pubspec.lock
+.c9
+.idea/
+.settings/
+*.swo
+modules/.settings
+.vscode
+modules/.vscode
+
+# Don't check in secret files
+*secret.js
